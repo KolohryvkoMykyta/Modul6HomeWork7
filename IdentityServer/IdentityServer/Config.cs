@@ -59,6 +59,17 @@ namespace IdentityServer
                 },
                 new Client
                 {
+                    ClientId = "mvc_pkce",
+                    ClientName = "MVC PKCE Client",
+                    AllowedGrantTypes = GrantTypes.Code,
+                    ClientSecrets = {new Secret("secret".Sha256())},
+                    RedirectUris = { $"{configuration["MvcUrl"]}/signin-oidc"},
+                    AllowedScopes = {"openid", "profile", "mvc","catalog.catalogbff"},
+                    RequirePkce = true,
+                    RequireConsent = false
+                },
+                new Client
+                {
                     ClientId = "catalogswaggerui",
                     ClientName = "Catalog Swagger UI",
                     AllowedGrantTypes = GrantTypes.Implicit,

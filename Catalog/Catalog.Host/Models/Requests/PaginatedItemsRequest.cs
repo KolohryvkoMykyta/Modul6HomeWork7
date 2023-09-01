@@ -9,7 +9,7 @@ public class PaginatedItemsRequest<T>
     where T : notnull
 {
     [Required]
-    [Range(1, 100)]
+    [Range(0, 100)]
     public int PageIndex { get; set; }
 
     [Required]

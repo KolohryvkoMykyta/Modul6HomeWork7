@@ -1,6 +1,22 @@
 version: '3.8'
 
 services:
+  basket.api:
+    container_name: lde.basket.api
+    build:
+      context: .
+      dockerfile: Basket/Basket.Host/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5003
+      - Authorization__Authority=http://www.alevelwebsite.com:5002
+      - Redis__Host=www.alevelwebsite.com:6380
+      - Redis__CacheTimeout=00:00:10
+      - PathBase=http://www.alevelwebsite.com:5003
+    depends_on:
+      - redis
+    ports:
+      - 5003:5003
   catalog.api:
     container_name: lde.catalog.api
     build:
@@ -16,6 +32,24 @@ services:
       - postgres
     ports:
       - 5000:5000
+  web.mvc:
+    container_name: lde.web.mvc
+    build:
+      context: .
+      dockerfile: Web/MVC/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5001
+      - CatalogUrl=http://www.alevelwebsite.com:5000/api/v1/catalogbff
+      - Authorization__Authority=http://www.alevelwebsite.com:5002
+      - IdentityUrl=http://www.alevelwebsite.com:5002
+      - CallBackUrl=http://www.alevelwebsite.com/
+      - RedirectUri=http://www.alevelwebsite.com/signin-oidc
+    depends_on:
+      - catalog.api
+      - identityserver
+    ports:
+      - 5001:5001
   identityserver:
     container_name: lde.identityserver
     build:
@@ -59,6 +93,7 @@ services:
     container_name: lde.redis
     ports:
       - 6380:6379
+
 networks:
   default:
     driver: bridge
