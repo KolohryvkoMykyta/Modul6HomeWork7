@@ -1,15 +1,17 @@
 ﻿@model CatalogItem
 
+<a asp-controller="Catalog" asp-action="Product" asp-route-id="@Model.Id">
+    <form>
+    
+        <img class="esh-catalog-thumbnail" src="@Model.PictureUrl" />
 
-<form>
-
-    <img class="esh-catalog-thumbnail" src="@Model.PictureUrl" />
-
-    <div class="esh-catalog-name">
+        <div class="esh-catalog-name">
         <span>@Model.Name</span>
-    </div>
-    <div class="esh-catalog-price">
+        </div>
+        <div class="esh-catalog-price">
         <span>@Model.Price.ToString("N2")</span>
-    </div>
-    <input type="hidden" asp-for="@Model.Id" name="id" />
-</form>
+        </div>
+        <input type="hidden" asp-for="@Model.Id" name="id" />
+        
+    </form>
+</a>

@@ -1,0 +1,54 @@
+﻿@model MVC.ViewModels.BasketViewModels.BasketViewModel
+
+@{
+    ViewData["Title"] = "Basket";
+}
+
+<div class="container">
+    <div class="text-center">
+        <h1>Your Basket</h1>
+    </div>
+
+    @if (Model.BasketItems.Count() > 0)
+    {
+        <div class="text-center mt-4 font-weight-bold">
+            <h4>Total Cost: $ @Model.BasketItems.Sum(item => item.Price).ToString("N2")</h4>
+        </div>
+
+        <div class="esh-catalog-items">
+            <div class="row">
+                <div class="col-md-6 font-weight-bold h5">Name</div>
+                <div class="col-md-4 font-weight-bold h5">Price</div>
+            </div>
+            @foreach (var basketItem in Model.BasketItems)
+            {
+                <div class="row border-top">
+                    <div class="col-md-6 font-weight-bold h5">@basketItem.Name</div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-4 font-weight-bold h5">$@basketItem.Price.ToString("N2")</div>
+                            <div class="col-md-2">
+                                <a class="esh-identity-item" href="@Url.Action("RemoveBasketItem", "Basket", new { id = basketItem.Id })">
+                                    <div style="display: flex; align-items: center;">
+                                        <img class="esh-identity-image" src="~/images/deleteBasket.png" alt="Remove">
+                                        <span style="color: red; margin-left: 5px;">Delete</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <div class="text-center mt-4">
+            <button class="btn btn-danger" onclick="location.href='@Url.Action("ClearBasket", "Basket")'">Clear Basket</button>
+        </div>
+    }
+    else
+    {
+        <div class="esh-catalog-items">
+            <p class="text-center">THERE ARE NO ITEMS IN BASKET</p>
+        </div>
+    }
+</div>

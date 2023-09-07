@@ -30,13 +30,12 @@ namespace IdentityServer
                 {
                     Scopes = new List<Scope>
                     {
-                        new Scope("catalog.catalogbff"),
                         new Scope("catalog.catalogitem"),
                         new Scope("catalog.catalogbrand"),
                         new Scope("catalog.catalogtype"),
                         new Scope("catalog.catalogradius"),
                     },
-                }
+                },
             };
         }
 
@@ -47,6 +46,19 @@ namespace IdentityServer
                 new Client
                 {
                     ClientId = "catalog",
+
+                    // no interactive user, use the clientid/secret for authentication
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+
+                    // secret for authentication
+                    ClientSecrets =
+                    {
+                        new Secret("secret".Sha256())
+                    },
+                },
+                new Client
+                {
+                    ClientId = "basket",
 
                     // no interactive user, use the clientid/secret for authentication
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
@@ -80,7 +92,27 @@ namespace IdentityServer
 
                     AllowedScopes =
                     {
-                        "catalog.catalogbff", "catalog.catalogitem", "catalog.catalogbrand", "catalog.catalogtype", "catalog.catalogradius", "mvc"
+                        "catalog.catalogbff",
+                        "catalog.catalogitem",
+                        "catalog.catalogbrand",
+                        "catalog.catalogtype",
+                        "catalog.catalogradius",
+                        "mvc"
+                    }
+                },
+                new Client
+                {
+                    ClientId = "basketswaggerui",
+                    ClientName = "Basket Swagger UI",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowAccessTokensViaBrowser = true,
+
+                    RedirectUris = { $"{configuration["BasketApi"]}/swagger/oauth2-redirect.html" },
+                    PostLogoutRedirectUris = { $"{configuration["BasketApi"]}/swagger/" },
+
+                    AllowedScopes =
+                    {
+                        "mvc"
                     }
                 },
             };

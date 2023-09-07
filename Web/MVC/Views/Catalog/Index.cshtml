@@ -8,19 +8,33 @@
     </div>
 </section>
 
-<section class="esh-catalog-filters">
+<section style="background-color: black; padding: 20px 0 10px;">
     <div class="container">
-        <form asp-action="Index" asp-controller="Catalog" method="post">
-            <label class="esh-catalog-label" data-title="brand">
-                <select asp-for="@Model.BrandFilterApplied" asp-items="@Model.Brands" class="esh-catalog-filter"></select>
-            </label>
-            <label class="esh-catalog-label" data-title="type">
-                <select asp-for="@Model.TypesFilterApplied" asp-items="@Model.Types" class="esh-catalog-filter"></select>
-            </label>
-            <label class="esh-catalog-label" data-title="radius">
-                <select asp-for="@Model.RadiusFilterApplid" asp-items="@Model.Radius" class="esh-catalog-filter"></select>
-            </label>
-            <input class="esh-catalog-send" type="image" src="~/images/arrow-right.svg" />
+        <form asp-action="Index" asp-controller="Catalog" method="post" class="row">
+            <div class="col-md-3 mb-2">
+                <div class="form-group">
+                    <select id="brand" asp-for="@Model.BrandFilterApplied" asp-items="@Model.Brands" class="form-control">
+                        <option value="">Choose a brand</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3 mb-2">
+                <div class="form-group">
+                    <select id="type" asp-for="@Model.TypesFilterApplied" asp-items="@Model.Types" class="form-control">
+                        <option value="">Choose a type</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3 mb-2">
+                <div class="form-group">
+                    <select id="radius" asp-for="@Model.RadiusesFilterApplied" asp-items="@Model.Radiuses" class="form-control">
+                        <option value="">Choose a radius</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3 mb-2">
+                <button type="submit" class="btn btn-primary btn-blockstyle=" style="width: auto;">Apply</button>
+            </div>
         </form>
     </div>
 </section>

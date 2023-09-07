@@ -4,6 +4,8 @@ namespace Basket.Host.Services.Interfaces;
 
 public interface IBasketService
 {
-    Task TestAdd(string userId, string data);
-    Task<TestGetResponse> TestGet(string userId);
+    Task AddItem(string userId, BasketItem data);
+    Task<GetResponse> GetItems(string userId);
+    Task ClearData(string userId);
+    Task RemoveItem(string userId, int itemId);
 }

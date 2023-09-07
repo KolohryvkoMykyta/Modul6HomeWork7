@@ -20,22 +20,41 @@ public class BasketBffController : ControllerBase
         _logger = logger;
         _basketService = basketService;
     }
-    
+
     [HttpPost]
     [ProducesResponseType((int)HttpStatusCode.OK)]
-    public async Task<IActionResult> TestAdd(TestAddRequest data)
+    public async Task<IActionResult> AddItem(AddRequest data)
     {
         var basketId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
-        await _basketService.TestAdd(basketId!, data.Data);
+        var item = new BasketItem() { Id = data.Id, Name = data.Name, Price = data.Price };
+        await _basketService.AddItem(basketId!, item);
         return Ok();
     }
 
     [HttpPost]
-    [ProducesResponseType(typeof(TestGetResponse), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> TestGet()
+    [ProducesResponseType(typeof(GetResponse), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> GetItems()
     {
         var basketId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
-        var response = await _basketService.TestGet(basketId!);
+        var response = await _basketService.GetItems(basketId!);
         return Ok(response);
+    }
+
+    [HttpPost]
+    [ProducesResponseType((int)HttpStatusCode.OK)]
+    public async Task<IActionResult> ClearData()
+    {
+        var basketId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
+        await _basketService.ClearData(basketId!);
+        return Ok();
+    }
+
+    [HttpPost]
+    [ProducesResponseType((int)HttpStatusCode.OK)]
+    public async Task<IActionResult> RemoveItem(RemoveItemRequest data)
+    {
+        var basketId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
+        await _basketService.RemoveItem(basketId!, data.Id);
+        return Ok();
     }
 }

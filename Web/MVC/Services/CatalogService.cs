@@ -1,6 +1,8 @@
 ﻿using Infrastructure.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using MVC.Dtos;
 using MVC.Models.Enums;
+using MVC.Models.Requests;
 using MVC.Services.Interfaces;
 using MVC.ViewModels;
 
@@ -35,7 +37,7 @@ public class CatalogService : ICatalogService
 
         if (radius.HasValue)
         {
-            filters.Add(CatalogTypeFilter.Type, radius.Value);
+            filters.Add(CatalogTypeFilter.Radius, radius.Value);
         }
 
         var result = await _httpClient.SendAsync<Catalog, PaginatedItemsRequest<CatalogTypeFilter>>($"{_settings.Value.CatalogUrl}/items",
@@ -87,5 +89,13 @@ public class CatalogService : ICatalogService
             Text = t.Radius,
             Value = t.Id.ToString()
         });
+    }
+
+    public async Task<CatalogItem> GetItemById(int id)
+    {
+        var result = await _httpClient.SendAsync<CatalogItem, GetByIdRequest<int>>($"{_settings.Value.CatalogUrl}/GetItemById",
+           HttpMethod.Post, new GetByIdRequest<int> { Id = id});
+
+        return result;
     }
 }

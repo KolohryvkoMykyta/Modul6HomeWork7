@@ -33,17 +33,33 @@ namespace Basket.Host.Services
             var cacheKey = GetItemCacheKey(key);
 
             var serialized = await redis.StringGetAsync(cacheKey);
-            
-            return serialized.HasValue ? 
-                _jsonSerializer.Deserialize<T>(serialized.ToString()) 
+
+            return serialized.HasValue ?
+                _jsonSerializer.Deserialize<T>(serialized)
                 : default(T)!;
+        }
+
+        public async Task ClearData(string key)
+        {
+            var cacheKey = GetItemCacheKey(key);
+
+            var redis = GetRedisDatabase();
+
+            if (await redis.KeyDeleteAsync(cacheKey))
+            {
+                _logger.LogInformation($"Cleared data for userId: {key}");
+            }
+            else
+            {
+                _logger.LogInformation($"No data found for userId: {key}");
+            }
         }
 
         private string GetItemCacheKey(string userId) =>
             $"{userId}";
 
         private async Task AddOrUpdateInternalAsync<T>(string key, T value,
-            IDatabase redis = null!, TimeSpan? expiry = null)
+    IDatabase redis = null!, TimeSpan? expiry = null)
         {
             redis = redis ?? GetRedisDatabase();
             expiry = expiry ?? _config.CacheTimeout;
@@ -51,14 +67,7 @@ namespace Basket.Host.Services
             var cacheKey = GetItemCacheKey(key);
             var serialized = _jsonSerializer.Serialize(value);
 
-            if (await redis.StringSetAsync(cacheKey, serialized, expiry))
-            {
-                _logger.LogInformation($"Cached value for key {key} cached");
-            }
-            else
-            {
-                _logger.LogInformation($"Cached value for key {key} updated");
-            }
+            await redis.StringSetAsync(cacheKey, serialized, expiry);
         }
 
         private IDatabase GetRedisDatabase() => _redisCacheConnectionService.Connection.GetDatabase();

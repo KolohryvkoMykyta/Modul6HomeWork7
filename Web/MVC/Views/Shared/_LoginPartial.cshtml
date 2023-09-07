@@ -8,19 +8,31 @@
         <div class="esh-identity">
             <form asp-area="" asp-controller="Account" asp-action="SignOut" method="post" id="logoutForm" class="navbar-right">
                 <section class="esh-identity-section">
-
+                    <img class="esh-identity-image" src="~/images/person.png">
                     <div class="esh-identity-name">@UserManager.Parse(User).Name</div>
                     <img class="esh-identity-image" src="~/images/arrow-down.png">
                 </section>
 
                 <section class="esh-identity-drop">
-                    
-                    <a class="esh-identity-item"
-                       href="javascript:document.getElementById('logoutForm').submit()">
 
-                        <div class="esh-identity-name esh-identity-name--upper">Log Out</div>
-                        <img class="esh-identity-image" src="~/images/logout.png">
-                    </a>
+                    <div>
+                        <a class="esh-identity-item" href="@Url.Action("TakeBasket", "Basket")">
+                            <img class="esh-identity-image" src="~/images/basket.png">
+                            <div class="esh-identity-name esh-identity-name--upper">
+                                <span class="esh-identity-text">Basket</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div>
+                        <a class="esh-identity-item" href="javascript:document.getElementById('logoutForm').submit()">
+                            <img class="esh-identity-image" src="~/images/logout.png">
+                            <div class="esh-identity-name esh-identity-name--upper">
+                                <span class="esh-identity-text">Log Out</span>
+                            </div>
+                        </a>
+                    </div>
+                    
                 </section>
             </form>
         </div>
@@ -34,7 +46,7 @@ else
                 <div class="esh-identity-item">
 
                     <a asp-area="" asp-controller="Account" asp-action="SignIn" class="esh-identity-name esh-identity-name--upper">
-                        Login
+                        Login <img class="esh-identity-image" src="~/images/login.png">
                     </a>
                 </div>
             </section>

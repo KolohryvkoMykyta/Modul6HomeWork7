@@ -13,12 +13,12 @@ public class CatalogController : Controller
         _catalogService = catalogService;
     }
 
-    public async Task<IActionResult> Index(int? brandFilterApplied, int? typesFilterApplied, int? radiusFilterApplied, int? page, int? itemsPage)
+    public async Task<IActionResult> Index(int? brandFilterApplied, int? typesFilterApplied, int? radiusesFilterApplied, int? page, int? itemsPage)
     {   
         page ??= 0;
         itemsPage ??= 6;
         
-        var catalog = await _catalogService.GetCatalogItems(page.Value, itemsPage.Value, brandFilterApplied, typesFilterApplied, radiusFilterApplied);
+        var catalog = await _catalogService.GetCatalogItems(page.Value, itemsPage.Value, brandFilterApplied, typesFilterApplied, radiusesFilterApplied);
         if (catalog == null)
         {
             return View("Error");
@@ -35,7 +35,7 @@ public class CatalogController : Controller
             CatalogItems = catalog.Data,
             Brands = await _catalogService.GetBrands(),
             Types = await _catalogService.GetTypes(),
-            Radius = await _catalogService.GetRadiuses(),
+            Radiuses = await _catalogService.GetRadiuses(),
             PaginationInfo = info
         };
 
@@ -43,5 +43,17 @@ public class CatalogController : Controller
         vm.PaginationInfo.Previous = (vm.PaginationInfo.ActualPage == 0) ? "is-disabled" : "";
 
         return View(vm);
+    }
+
+    public async Task<IActionResult> Product(int id)
+    {
+        var result = await _catalogService.GetItemById(id);
+
+        if (result == null) 
+        { 
+            return View("Error"); 
+        }
+
+        return View(result);
     }
 }
