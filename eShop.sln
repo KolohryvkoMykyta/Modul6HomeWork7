@@ -73,6 +73,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{0920AB
 		Proxy\assets\images\9.png = Proxy\assets\images\9.png
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Order", "Order", "{27222613-16B7-441F-AC16-24970F6084FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.Host", "Order.Host\Order.Host.csproj", "{B940C0E1-37A4-466B-9262-6511E99D2051}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +115,10 @@ Global
 		{7FB3EFBB-7322-448C-B586-8C691DB29F21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FB3EFBB-7322-448C-B586-8C691DB29F21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FB3EFBB-7322-448C-B586-8C691DB29F21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B940C0E1-37A4-466B-9262-6511E99D2051}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B940C0E1-37A4-466B-9262-6511E99D2051}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B940C0E1-37A4-466B-9262-6511E99D2051}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B940C0E1-37A4-466B-9262-6511E99D2051}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -129,6 +137,7 @@ Global
 		{7FB3EFBB-7322-448C-B586-8C691DB29F21} = {7F9C3A7B-2149-4254-A456-B8245305C9F2}
 		{E4D64275-EFD6-44B6-9F67-7F1E52400863} = {54C74A1B-6D46-4CC6-A8B4-39B1302EDFDE}
 		{0920AB84-C6C9-4D07-B814-DFDE7D8B4E2A} = {E4D64275-EFD6-44B6-9F67-7F1E52400863}
+		{B940C0E1-37A4-466B-9262-6511E99D2051} = {27222613-16B7-441F-AC16-24970F6084FD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FA720D3F-E87A-424F-8055-D736EAF23263}
