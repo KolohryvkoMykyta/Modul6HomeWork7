@@ -11,7 +11,7 @@ public class BusinessException : Exception
     {
     }
 
-    public BusinessException(string message, Exception innerException)
+    public BusinessException(string message, BusinessException innerException)
         : base(message, innerException)
     {
     }

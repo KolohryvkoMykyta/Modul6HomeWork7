@@ -8,6 +8,5 @@ namespace MVC.Services.Interfaces
         Task RemoveBasketItem(int id);
         Task<IReadOnlyList<BasketItem>> GetBasketItems();
         Task ClearData();
-
     }
 }

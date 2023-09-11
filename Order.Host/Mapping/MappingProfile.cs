@@ -8,7 +8,9 @@ namespace Order.Host.Mapping
         public MappingProfile()
         {
             CreateMap<OrderEntity, OrderDto>();
-            CreateMap<ProductEntity, ProductDto>();
+            CreateMap<ProductEntity, OrderProductDto>();
+            CreateMap<OrderDto, OrderEntity>();
+            CreateMap<OrderProductDto, ProductEntity>();
         }
     }
 }

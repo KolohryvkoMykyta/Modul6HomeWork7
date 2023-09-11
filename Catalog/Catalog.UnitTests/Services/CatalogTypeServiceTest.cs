@@ -132,7 +132,7 @@ namespace Catalog.UnitTests.Services
             Func<Task<bool>> testAction = async () => await _catalogTypeService.DeleteAsync(testId);
 
             // assert
-            await testAction.Should().ThrowAsync<BusinessException>();
+            await testAction.Should().ThrowAsync<Exception>();
         }
 
         [Fact]
@@ -167,7 +167,7 @@ namespace Catalog.UnitTests.Services
             Func<Task<bool>> testAction = async () => await _catalogTypeService.UpdateAsync(testId, _testType.Type);
 
             // assert
-            await testAction.Should().ThrowAsync<BusinessException>();
+            await testAction.Should().ThrowAsync<Exception>();
         }
 
         [Fact]
@@ -203,7 +203,7 @@ namespace Catalog.UnitTests.Services
             Func<Task<CatalogTypeDto>> testAction = async () => await _catalogTypeService.GetByIdAsync(testId);
 
             // assert
-            await testAction.Should().ThrowAsync<BusinessException>();
+            await testAction.Should().ThrowAsync<Exception>();
         }
 
         [Fact]

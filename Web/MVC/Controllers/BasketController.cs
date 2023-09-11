@@ -7,12 +7,10 @@ namespace MVC.Controllers
     public class BasketController : Controller
     {
         private readonly IBasketService _basketService;
-        private readonly IIdentityParser<ApplicationUser> _identityParserer;
-
-        public BasketController(IBasketService basketService, IIdentityParser<ApplicationUser> identityParserer)
+        
+        public BasketController(IBasketService basketService)
         {
             _basketService = basketService;
-            _identityParserer = identityParserer;
         }
 
         public async Task<IActionResult> TakeBasket()

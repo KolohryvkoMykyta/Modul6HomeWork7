@@ -14,7 +14,7 @@ public class CatalogController : Controller
     }
 
     public async Task<IActionResult> Index(int? brandFilterApplied, int? typesFilterApplied, int? radiusesFilterApplied, int? page, int? itemsPage)
-    {   
+    {
         page ??= 0;
         itemsPage ??= 6;
         
@@ -55,5 +55,10 @@ public class CatalogController : Controller
         }
 
         return View(result);
+    }
+
+    public IActionResult CookiesNotice()
+    {
+        return View();
     }
 }

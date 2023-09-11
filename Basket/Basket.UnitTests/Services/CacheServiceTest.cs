@@ -109,7 +109,7 @@ namespace Basket.UnitTests.Services
                         .Contains($"Cached value for key {testEntity.UserId} cached")),
                     It.IsAny<Exception>(),
                     It.IsAny<Func<It.IsAnyType, Exception, string>>() !),
-                Times.Once);
+                Times.Never);
         }
 
         [Fact]

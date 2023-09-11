@@ -130,4 +130,24 @@ public class CatalogItemRepository : ICatalogItemRepository
 
         return result;
     }
+
+    public async Task ChangeQuantity(int id)
+    {
+        var updatingItem = await _dbContext.CatalogItems.FindAsync(id);
+
+        if (updatingItem == null)
+        {
+            throw new BusinessException("Incorrect id");
+        }
+
+        if (updatingItem.AvailableStock > 0)
+        {
+            updatingItem.AvailableStock -= 1;
+
+            _dbContext.CatalogItems.Update(updatingItem);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        _logger.LogInformation($"Changed quantity items Id: {id}");
+    }
 }

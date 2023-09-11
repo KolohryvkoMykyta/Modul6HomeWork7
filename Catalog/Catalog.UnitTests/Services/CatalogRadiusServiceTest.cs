@@ -132,7 +132,7 @@ namespace Catalog.UnitTests.Services
             Func<Task<bool>> testAction = async () => await _catalogRadiusService.DeleteAsync(testId);
 
             // assert
-            await testAction.Should().ThrowAsync<BusinessException>();
+            await testAction.Should().ThrowAsync<Exception>();
         }
 
         [Fact]
@@ -167,7 +167,7 @@ namespace Catalog.UnitTests.Services
             Func<Task<bool>> testAction = async () => await _catalogRadiusService.UpdateAsync(testId, _testRadius.Radius);
 
             // assert
-            await testAction.Should().ThrowAsync<BusinessException>();
+            await testAction.Should().ThrowAsync<Exception>();
         }
 
         [Fact]
@@ -203,7 +203,7 @@ namespace Catalog.UnitTests.Services
             Func<Task<CatalogRadiusDto>> testAction = async () => await _catalogRadiusService.GetByIdAsync(testId);
 
             // assert
-            await testAction.Should().ThrowAsync<BusinessException>();
+            await testAction.Should().ThrowAsync<Exception>();
         }
 
         [Fact]

@@ -50,10 +50,9 @@
             <article class="row">
 
                 <section class="col-lg-7 col-md-6 col-12">
-                    <a class="navbar-brand" routerLink="catalog">
-                        <a asp-area="" asp-controller="Catalog" asp-action="Index">
-                            <img src="~/images/brand.png" />
-                        </a>
+                    <a class="navbar-brand" href="@Url.Action("Index", "Catalog")">
+                        <img src="~/images/brand.png" alt="Brand Image" />
+                        <span class=" font-weight-bold" style="font-size: 30px; font-family: Times New Roman, sans-serif;">Home</span>
                     </a>
                 </section>
                 
@@ -65,18 +64,18 @@
     @RenderBody()
 
 
-    <footer class="esh-app-footer">
+    <footer class="esh-app-footer bg-black text-white">
         <div class="container">
-            <article class="row">
-
-                <section class="col-sm-6">
-                    <img class="esh-app-footer-brand" src="~/images/brand_dark.png" />
-                </section>
-
-                <section class="col-sm-6">
-                </section>
-
-            </article>
+            <div class="row align-items-center">
+                <div class="col-md-2">
+                    <img class="esh-app-footer-brand" src="~/images/brand_dark.png" alt="Brand Logo" />
+                </div>
+                <div class="col-md-8 text-center" style="font-size: 13px;">
+                    &copy; 2023 Kolohryvko Mykyta. All rights reserved. <br /> Developed by <a href="https://www.linkedin.com/in/mykyta-kolohryvko-7a46a628a/" class="text-white" target="_blank">Kolohryvko Mykyta</a>
+                </div>
+                <div class="col-md-2">
+                </div>
+            </div>
         </div>
     </footer>
     

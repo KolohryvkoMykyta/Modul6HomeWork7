@@ -53,7 +53,7 @@ namespace Catalog.Host.Repositories
 
             if (result == null)
             {
-                throw new InvalidOperationException("Incorrect id");
+                throw new BusinessException("Incorrect id");
             }
 
             _dbContext.CatalogBrands.Remove(result);
@@ -70,7 +70,7 @@ namespace Catalog.Host.Repositories
 
             if (updatingItem == null)
             {
-                throw new InvalidOperationException("Incorrect id");
+                throw new BusinessException("Incorrect id");
             }
 
             updatingItem.Brand = name;

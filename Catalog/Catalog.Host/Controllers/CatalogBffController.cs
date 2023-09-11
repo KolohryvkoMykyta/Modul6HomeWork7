@@ -108,4 +108,13 @@ public class CatalogBffController : ControllerBase
         var result = await _radiusService.GetAllRadiusesAsync();
         return Ok(result);
     }
+
+    [HttpPost]
+    [AllowAnonymous]
+    [ProducesResponseType((int)HttpStatusCode.OK)]
+    public async Task<IActionResult> ChangeQuantity(ChangeQuantityRequest id)
+    {
+        await _catalogService.ChangeQuantityAsync(id.Id);
+        return Ok();
+    }
 }

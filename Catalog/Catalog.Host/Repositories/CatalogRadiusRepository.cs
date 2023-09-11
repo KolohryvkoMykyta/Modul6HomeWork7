@@ -89,7 +89,7 @@ namespace Catalog.Host.Repositories
 
             if (result == null)
             {
-                throw new BusinessException("Incorrect Id");
+                throw new Infrastructure.Exceptions.BusinessException("Incorrect Id");
             }
 
             return result;

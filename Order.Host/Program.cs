@@ -3,6 +3,10 @@ using Infrastructure.Filters;
 using Microsoft.OpenApi.Models;
 using Order.Host.Configurations;
 using Order.Host.Data;
+using Order.Host.Repositories;
+using Order.Host.Repositories.Interfaces;
+using Order.Host.Services;
+using Order.Host.Services.Interfaces;
 
 var configuration = GetConfiguration();
 
@@ -50,6 +54,9 @@ builder.Services.Configure<OrderConfig>(configuration);
 builder.Services.AddAuthorization(configuration);
 
 builder.Services.AddAutoMapper(typeof(Program));
+
+builder.Services.AddTransient<IOrderRepository, OrderRepository>();
+builder.Services.AddTransient<IOrderService, OrderService>();
 
 builder.Services.AddDbContextFactory<ApplicationDbContext>(opts => opts.UseNpgsql(configuration["ConnectionString"]));
 builder.Services.AddScoped<IDbContextWrapper<ApplicationDbContext>, DbContextWrapper<ApplicationDbContext>>();

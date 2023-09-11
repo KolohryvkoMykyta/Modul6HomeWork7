@@ -43,7 +43,7 @@ public class BaseDataServiceTest
         // act
         Func<Task> testAction = async () => await _mockService.RunWithException();
 
-        await testAction.Should().ThrowAsync<Exception>();
+        await testAction.Should().ThrowAsync<System.Exception>();
 
             // assert
         _dbContextTransaction.Verify(t => t.CommitAsync(CancellationToken.None), Times.Never);
@@ -53,10 +53,10 @@ public class BaseDataServiceTest
             x => x.Log(
                 LogLevel.Error,
                 It.IsAny<EventId>(),
-                It.Is<It.IsAnyType>((o, t) => o.ToString() !
+                It.Is<It.IsAnyType>((object o, Type t) => o.ToString() !
                     .Contains($"transaction is rollbacked")),
-                It.IsAny<Exception>(),
-                It.IsAny<Func<It.IsAnyType, Exception, string>>() !),
+                It.IsAny<System.Exception>(),
+                It.IsAny<Func<It.IsAnyType, System.Exception, string>>() !),
             Times.Once);
     }
 }

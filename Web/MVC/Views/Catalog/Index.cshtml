@@ -10,7 +10,7 @@
 
 <section style="background-color: black; padding: 20px 0 10px;">
     <div class="container">
-        <form asp-action="Index" asp-controller="Catalog" method="post" class="row">
+        <form asp-action="Index" asp-controller="Catalog" method="get" class="row">
             <div class="col-md-3 mb-2">
                 <div class="form-group">
                     <select id="brand" asp-for="@Model.BrandFilterApplied" asp-items="@Model.Brands" class="form-control">

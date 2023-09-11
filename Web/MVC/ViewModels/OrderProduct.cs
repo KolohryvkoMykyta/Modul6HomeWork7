@@ -1,6 +1,6 @@
-﻿namespace Order.Host.Models.Dtos
+﻿namespace MVC.ViewModels
 {
-    public class ProductDto
+    public class OrderProduct
     {
         public int Id { get; set; }
         public int ProductId { get; set; }

@@ -48,7 +48,7 @@ namespace MVC.Services
 
         public async Task ClearData()
         {
-            await _httpClient.SendAsync<object, string> ($"{_settings.Value.BasketUrl}/clearData",
+            await _httpClient.SendAsync<object, object> ($"{_settings.Value.BasketUrl}/clearData",
                 HttpMethod.Post,
                 default);
         }

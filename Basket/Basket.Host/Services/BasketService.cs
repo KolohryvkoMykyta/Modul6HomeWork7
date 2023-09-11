@@ -18,9 +18,8 @@ public class BasketService : IBasketService
     
     public async Task AddItem(string userId, BasketItem data)
     {
-        _logger.LogInformation($"userId: {userId}");
         bool isExistingData;
-        var list = new List<BasketItem> { data };
+        var list = new List<BasketItem>() { data };
 
         var existingData = await _cacheService.GetAsync<List<BasketItem>>(userId);
 
@@ -49,7 +48,6 @@ public class BasketService : IBasketService
 
     public async Task RemoveItem(string userId, int itemId)
     {
-        _logger.LogInformation($"userId: {userId}");
         var existingData = await _cacheService.GetAsync<List<BasketItem>>(userId);
 
         if (existingData != null)
@@ -75,14 +73,12 @@ public class BasketService : IBasketService
 
     public async Task<GetResponse> GetItems(string userId)
     {
-        _logger.LogInformation($"userId: {userId}");
         var result = await _cacheService.GetAsync<List<BasketItem>>(userId);
         return new GetResponse() { Data = result ?? new List<BasketItem>() };
     }
 
     public async Task ClearData(string userId)
     {
-        _logger.LogInformation($"userId: {userId}");
         await _cacheService.ClearData(userId);
     }
 }

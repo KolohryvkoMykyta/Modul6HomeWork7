@@ -1,0 +1,53 @@
+﻿@model MVC.ViewModels.OrderViewModels.OrderViewModel
+
+@{
+    ViewData["Title"] = "Orders";
+}
+
+<div style="height: 10px;background-color: black;"></div>
+<div style="height: 20px;background-color: #d41824;"></div>
+<div style="height: 10px;background-color: black;"></div>
+<div class="container">
+    <div class="text-center">
+        <h1>Your Orders:</h1>
+    </div>
+
+    @if (Model.OrderList.Count() > 0)
+    {
+        <div class="esh-catalog-items">
+            @foreach (var orderItem in Model.OrderList)
+            {
+                <div class="row mb-4 border border-5 rounded">
+                    <div class="col-md-9 mx-auto">
+                        <div class="text-center mb-4">
+                            <h1 class="h3">Order #@orderItem.Id</h1>
+                            <h1 class="h4">Created: @orderItem.CreatedDate</h1>
+                            <h1 class="h4">Total Price: $@orderItem.Products.Sum(product => product.Price);</h1>
+                        </div>
+
+                        <div class="row font-weight-bold border text-center">
+                            <div class="col-md-2 h6 text-center">Item Code</div>
+                            <div class="col-md-6 h6 text-center">Name</div>
+                            <div class="col-md-4 h6 text-center">Price</div>
+                        </div>
+
+                        @foreach (var orderProduct in orderItem.Products)
+                        {
+                            <div class="row border text-center">
+                                <div class="col-md-2 h6 text-center">#@orderProduct.ProductId</div>
+                                <div class="col-md-6 h6 text-center">@orderProduct.Name</div>
+                                <div class="col-md-4 h6 text-center">$@orderProduct.Price</div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="esh-catalog-items">
+            <p class="text-center">THERE ARE NO ORDERS</p>
+        </div>
+    }
+</div>

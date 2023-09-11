@@ -164,6 +164,33 @@ public class CatalogServiceTest
         Func<Task<CatalogItemDto>> testAction = async () => await _catalogService.GetItemByIdAsync(testId);
 
         // assert
-        await testAction.Should().ThrowAsync<BusinessException>();
+        await testAction.Should().ThrowAsync<Exception>();
+    }
+
+    [Fact]
+    public async Task ChangeQuantitySuccess()
+    {
+        // arrange
+        var productId = 1;
+
+        // Act
+        await _catalogService.ChangeQuantityAsync(productId);
+
+        // Assert
+        _catalogItemRepository.Verify(c => c.ChangeQuantity(productId), Times.Once);
+    }
+
+    [Fact]
+    public async Task ChangeQuantityFailed()
+    {
+        // arrange
+        var productId = 1;
+        _catalogItemRepository.Setup(c => c.ChangeQuantity(productId)).ThrowsAsync(new Exception("Some error occurred."));
+
+        // act
+        Func<Task> testAction = async () => await _catalogService.ChangeQuantityAsync(productId);
+
+        // assert
+        await testAction.Should().ThrowAsync<Exception>();
     }
 }

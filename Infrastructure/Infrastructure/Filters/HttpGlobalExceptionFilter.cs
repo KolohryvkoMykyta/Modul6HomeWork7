@@ -17,7 +17,7 @@ public class HttpGlobalExceptionFilter : IExceptionFilter
 
     public void OnException(ExceptionContext context)
     {
-        if (context.Exception is BusinessException ex)
+        if (context.Exception is Exceptions.BusinessException ex)
         {
             var problemDetails = new ValidationProblemDetails()
             {

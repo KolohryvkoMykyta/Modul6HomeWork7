@@ -7,6 +7,6 @@ namespace Order.Host.Models.Dtos
         public int Id { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
         public int UserId { get; set; }
-        public List<ProductDto> Products { get; set; } = null!;
+        public List<OrderProductDto> Products { get; set; } = null!;
     }
 }

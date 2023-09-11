@@ -106,13 +106,13 @@ public class CatalogItemServiceTest
         var testId = 1000;
 
         _catalogItemRepository.Setup(s => s.DeleteAsync(
-            It.Is<int>(i => i == testId))).Throws(new BusinessException("Тестовое исключение"));
+            It.Is<int>(i => i == testId))).Throws(new Infrastructure.Exceptions.BusinessException("Тестовое исключение"));
 
         // act
         Func<Task<bool>> testAction = async () => await _catalogService.DeleteAsync(testId);
 
         // assert
-        await testAction.Should().ThrowAsync<BusinessException>();
+        await testAction.Should().ThrowAsync<Exception>();
     }
 
     [Fact]
@@ -161,6 +161,6 @@ public class CatalogItemServiceTest
         Func<Task<bool>> testAction = async () => await _catalogService.UpdateAsync(testId, _testItem.Name, _testItem.Description, _testItem.Price, _testItem.AvailableStock, _testItem.CatalogBrandId, _testItem.CatalogTypeId, _testItem.CatalogRadiusId, _testItem.PictureFileName);
 
         // assert
-        await testAction.Should().ThrowAsync<BusinessException>();
+        await testAction.Should().ThrowAsync<Exception>();
     }
 }

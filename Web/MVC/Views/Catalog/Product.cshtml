@@ -3,19 +3,26 @@
 @{
     ViewData["Title"] = "Product information";
 }
-
+<div style="height: 10px;background-color: black;"></div>
+<div style="height: 20px;background-color: #d41824;"></div>
+<div style="height: 10px;background-color: black;"></div>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
+            <a href="javascript:history.back()" class="btn btn-secondary mt-3 mb-3"><img src="~/images/back.png" class="img-fluid" /> Back</a>
             <h1>Product information</h1>
             <table class="table">
+                <tr>
+                    <td>Item Code:</td>
+                    <td>#@Model.Id</td>
+                </tr>
                 <tr>
                     <td>Name:</td>
                     <td>@Model.Name</td>
                 </tr>
                 <tr>
                     <td>Price:</td>
-                    <td>@Model.Price.ToString("N2")</td>
+                    <td>$@Model.Price.ToString("N2")</td>
                 </tr>
                 <tr>
                     <td>Description:</td>
@@ -49,7 +56,6 @@
                         Add to Basket
                     </button>
                 </div>
-            </div>
             </div>
         </div>
     </div>

@@ -10,4 +10,5 @@ public interface ICatalogItemRepository
     Task<bool> DeleteAsync(int id);
     Task<bool> UpdateAsync(int id, string name, string description, decimal price, int availableStock, int catalogBrandId, int catalogTypeId, int catalogRadiusId, string pictureFileName);
     Task<CatalogItem> GetItemByIdAsync(int id);
+    Task ChangeQuantity(int id);
 }

@@ -98,4 +98,10 @@ public class CatalogService : ICatalogService
 
         return result;
     }
+
+    public async Task ChangeQuantity(int id)
+    {
+        await _httpClient.SendAsync<object, ChangeQuantityRequest>($"{_settings.Value.CatalogUrl}/ChangeQuantity",
+           HttpMethod.Post, new ChangeQuantityRequest { Id = id });
+    }
 }

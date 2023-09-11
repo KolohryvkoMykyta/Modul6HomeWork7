@@ -73,4 +73,12 @@ public class CatalogService : BaseDataService<ApplicationDbContext>, ICatalogSer
             return _mapper.Map<CatalogItemDto>(result);
         });
     }
+
+    public async Task ChangeQuantityAsync(int id)
+    {
+        await ExecuteSafeAsync(async () =>
+        {
+            await _catalogItemRepository.ChangeQuantity(id);
+        });
+    }
 }

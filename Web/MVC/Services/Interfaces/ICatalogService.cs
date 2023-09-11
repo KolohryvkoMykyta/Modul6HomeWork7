@@ -9,4 +9,5 @@ public interface ICatalogService
     Task<IEnumerable<SelectListItem>> GetTypes();
     Task<IEnumerable<SelectListItem>> GetRadiuses();
     Task<CatalogItem> GetItemById(int id);
+    Task ChangeQuantity(int id);
 }

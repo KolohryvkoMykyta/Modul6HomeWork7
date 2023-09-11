@@ -60,6 +60,7 @@ builder.Services.AddTransient<IHttpClientService, HttpClientService>();
 builder.Services.AddTransient<ICatalogService, CatalogService>();
 builder.Services.AddTransient<IIdentityParser<ApplicationUser>, IdentityParser>();
 builder.Services.AddTransient<IBasketService, BasketService>();
+builder.Services.AddTransient<IOrderService, OrderService>();
 
 var app = builder.Build();
 
@@ -80,7 +81,7 @@ app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapControllerRoute("default", "{controller=Catalog}/{action=Index}/{id?}");
+    endpoints.MapControllerRoute("default", "{controller=Catalog}/{action=CookiesNotice}/{id?}");
     endpoints.MapControllerRoute("defaultError", "{controller=Error}/{action=Error}");
     endpoints.MapControllers();
 });
