@@ -1,0 +1,9 @@
+global using Microsoft.Extensions.Logging;
+global using Moq;
+global using Xunit;
+global using Microsoft.Extensions.Options;
+global using MVC.Models.Requests;
+global using MVC.Models.Responses;
+global using MVC.Services;
+global using MVC.Services.Interfaces;
+global using MVC.ViewModels;

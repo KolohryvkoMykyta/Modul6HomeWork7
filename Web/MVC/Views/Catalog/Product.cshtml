@@ -1,0 +1,103 @@
+﻿@model CatalogItem
+
+@{
+    ViewData["Title"] = "Product information";
+}
+<div style="height: 10px;background-color: black;"></div>
+<div style="height: 20px;background-color: #d41824;"></div>
+<div style="height: 10px;background-color: black;"></div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <a href="javascript:history.back()" class="btn btn-secondary mt-3 mb-3"><img src="~/images/back.png" class="img-fluid" /> Back</a>
+            <h1>Product information</h1>
+            <table class="table">
+                <tr>
+                    <td>Item Code:</td>
+                    <td>#@Model.Id</td>
+                </tr>
+                <tr>
+                    <td>Name:</td>
+                    <td>@Model.Name</td>
+                </tr>
+                <tr>
+                    <td>Price:</td>
+                    <td>$@Model.Price.ToString("N2")</td>
+                </tr>
+                <tr>
+                    <td>Description:</td>
+                    <td>@Model.Description</td>
+                </tr>
+                <tr>
+                    <td>Brand:</td>
+                    <td>@Model.CatalogBrand.Brand</td>
+                </tr>
+                <tr>
+                    <td>Type:</td>
+                    <td>@Model.CatalogType.Type</td>
+                </tr>
+                <tr>
+                    <td>Radius:</td>
+                    <td>@Model.CatalogRadius.Radius</td>
+                </tr>
+                <tr>
+                    <td>Available Stock:</td>
+                    <td>@Model.AvailableStock</td>
+                </tr>
+            </table>
+            <img src="@Model.PictureUrl" class="img-fluid" alt="@Model.Name" />
+            <div class="row justify-content-center mt-4">
+                <div class="col-md-6 text-center">
+                    <button id="addToBasketButton" class="btn btn-primary"
+                            data-id="@Model.Id"
+                            data-name="@Model.Name"
+                            data-price="@Model.Price">
+                        <img id="addToBasketImage" src="~/images/AddItem.png" alt="AddBasketItem" class="img-fluid" />
+                        Add to Basket
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (Context.User.Identity.IsAuthenticated)
+{
+    <script>
+        $(document).ready(function () {
+            $("#addToBasketImage").click(function () {
+                // Вызываем клик на кнопке при клике на изображение
+                $("#addToBasketButton").click();
+            });
+
+            $("#addToBasketButton").click(function () {
+                var id = $(this).data("id");
+                var name = $(this).data("name");
+                var price = $(this).data("price");
+
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("AddBasketItem", "Basket")",
+                    data: { id: id, name: name, price: price },
+                    success: function () {
+                        $("#confirmationModal").modal("show");
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
+}
+else
+{
+    <script>
+        $(document).ready(function () {
+            $("#addToBasketButton").click(function () {
+                window.location.href = "/Account/SignIn";
+            });
+        });
+    </script>
+}
+

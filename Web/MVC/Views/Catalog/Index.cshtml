@@ -1,0 +1,74 @@
+﻿@model MVC.ViewModels.CatalogViewModels.IndexViewModel
+
+@{
+    ViewData["Title"] = "Catalog";
+}
+<section class="esh-catalog-hero">
+    <div class="container">
+    </div>
+</section>
+
+<section style="background-color: black; padding: 20px 0 10px;">
+    <div class="container">
+        <form asp-action="Index" asp-controller="Catalog" method="get" class="row">
+            <div class="col-md-3 mb-2">
+                <div class="form-group">
+                    <select id="brand" asp-for="@Model.BrandFilterApplied" asp-items="@Model.Brands" class="form-control">
+                        <option value="">Choose a brand</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3 mb-2">
+                <div class="form-group">
+                    <select id="type" asp-for="@Model.TypesFilterApplied" asp-items="@Model.Types" class="form-control">
+                        <option value="">Choose a type</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3 mb-2">
+                <div class="form-group">
+                    <select id="radius" asp-for="@Model.RadiusesFilterApplied" asp-items="@Model.Radiuses" class="form-control">
+                        <option value="">Choose a radius</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3 mb-2">
+                <button type="submit" class="btn btn-primary btn-blockstyle=" style="width: auto;">Apply</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row">
+        <br />
+        @if(ViewBag.BasketInoperativeMsg != null)
+        {
+        <div class="alert alert-warning" role="alert">
+            &nbsp;@ViewBag.BasketInoperativeMsg
+        </div>
+        }
+    </div>
+
+    @if (Model.CatalogItems.Count() > 0)
+    {
+    <partial name="_pagination" for="PaginationInfo" />
+
+    <div class="esh-catalog-items row">
+        @foreach (var catalogItem in Model.CatalogItems)
+            {
+        <div class="esh-catalog-item col-md-4">
+            <partial name="_product" model="catalogItem" />
+        </div>
+            }
+    </div>
+
+    <partial name="_pagination" for="PaginationInfo" />
+    }
+    else
+    {
+    <div class="esh-catalog-items row">
+        THERE ARE NO RESULTS THAT MATCH YOUR SEARCH
+    </div>
+    }
+</div>

@@ -1,0 +1,68 @@
+@using MVC.Services.Interfaces
+
+@inject IIdentityParser<ApplicationUser> UserManager
+
+@if (Context.User.Identity.IsAuthenticated)
+{
+    <section class="col-lg-4 col-md-5 col-xs-12">
+        <div class="esh-identity">
+            <form asp-area="" asp-controller="Account" asp-action="SignOut" method="post" id="logoutForm" class="navbar-right">
+                <section class="esh-identity-section">
+                    <img class="esh-identity-image" src="~/images/person.png">
+                    <div class="esh-identity-name">@UserManager.Parse(User).Name</div>
+                    <img class="esh-identity-image" src="~/images/arrow-down.png">
+                </section>
+
+                <section class="esh-identity-drop">
+
+                    <div>
+                        <a class="esh-identity-item" href="@Url.Action("TakeBasket", "Basket")">
+                            <img class="esh-identity-image" src="~/images/basket.png">
+                            <div class="esh-identity-name esh-identity-name--upper">
+                                <span class="esh-identity-text">Basket</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div>
+                        <a class="esh-identity-item" href="@Url.Action("GetOrders", "Order")">
+                            <img class="esh-identity-image" src="~/images/order.png">
+                            <div class="esh-identity-name esh-identity-name--upper">
+                                <span class="esh-identity-text">Orders</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div>
+                        <a class="esh-identity-item" href="javascript:document.getElementById('logoutForm').submit()">
+                            <img class="esh-identity-image" src="~/images/logout.png">
+                            <div class="esh-identity-name esh-identity-name--upper">
+                                <span class="esh-identity-text">Log Out</span>
+                            </div>
+                        </a>
+                    </div>
+                    
+                </section>
+            </form>
+        </div>
+    </section>
+}
+else
+{
+    <section class="col-lg-4 col-md-5 col-xs-12">
+        <div class="esh-identity">
+            <section class="esh-identity-section">
+                <div class="esh-identity-item">
+
+                    <a asp-area="" asp-controller="Account" asp-action="SignIn" class="esh-identity-name esh-identity-name--upper">
+                        Login <img class="esh-identity-image" src="~/images/login.png">
+                    </a>
+                </div>
+            </section>
+        </div>
+    </section>
+
+    <section class="col-lg-1 col-xs-12">
+
+    </section>
+}
